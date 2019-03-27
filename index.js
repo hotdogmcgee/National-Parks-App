@@ -1,6 +1,5 @@
 'use strict';
 
-// put your own value below!
 const apiKey = 'afkeweZlCdlKiwwYPVzLoSkmhlDcJh3JkOUeL0Xt'; 
 const searchURL = 'https://developer.nps.gov/api/v1/parks';
 
@@ -29,16 +28,22 @@ function displayResults(responseJson) {
 
 function getParks(query, maxResults=10) {
   const params = {
-    q: query,
-    maxResults,
-    type: 'video'
+    stateCode: query,
+    limit: maxResults - 1 ,
+    // api_key: apiKey,
   };
   const queryString = formatQueryParams(params)
   const url = searchURL + '?' + queryString;
+  // const testURL = 'https://developer.nps.gov/api/v1/parks?stateCode=PA&maxResults=10'
 
   console.log(url);
 
-  fetch(url)
+  const options = {
+    headers: new Headers({
+      "X-Api-Key": apiKey})
+  };
+
+  fetch(url, options)
     .then(response => {
       if (response.ok) {
         return response.json();
@@ -50,6 +55,7 @@ function getParks(query, maxResults=10) {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
 }
+
 
 function watchForm() {
   $('form').submit(event => {
