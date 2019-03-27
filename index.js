@@ -30,7 +30,7 @@ function getParks(query, maxResults=10) {
   const params = {
     stateCode: query,
     limit: maxResults - 1 ,
-    // api_key: apiKey,
+    api_key: apiKey,
   };
   const queryString = formatQueryParams(params)
   const url = searchURL + '?' + queryString;
@@ -38,12 +38,12 @@ function getParks(query, maxResults=10) {
 
   console.log(url);
 
-  const options = {
-    headers: new Headers({
-      "X-Api-Key": apiKey})
-  };
+  // const options = {
+  //   headers: new Headers({
+  //     "X-Api-Key": apiKey})
+  // };
 
-  fetch(url, options)
+  fetch(url)
     .then(response => {
       if (response.ok) {
         return response.json();
