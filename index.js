@@ -17,7 +17,7 @@ function displayResults(responseJson) {
   // iterate through the items array
   for (let i = 0; i < responseJson.data.length; i++){
     $('#results-list').append(
-      `<li><h3>${responseJson.data[i].fullName}</h3>
+      `<li><h3>${responseJson.data[i].fullname}</h3>
       <p>${responseJson.data[i].description}</p>
       <p><a href="${responseJson.data[i].url}">Visit!</a><p>
       </li>`
@@ -28,7 +28,7 @@ function displayResults(responseJson) {
 
 function getParks(query, maxResults=10) {
   const params = {
-    stateCode: query,
+    stateCode: query.toUpperCase(),
     limit: maxResults - 1 ,
     api_key: apiKey,
   };
